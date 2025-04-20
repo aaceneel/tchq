@@ -5,127 +5,363 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trading Circle HQ Partner Program</title>
     <style>
+        :root {
+            --primary-bg: #ffffff;
+            --text-color: #000000;
+            --accent-blue: #0657D0;
+            --light-blue: #3b82f6;
+            --table-header: #f1f5f9;
+            --table-border: #e2e8f0;
+            --highlight-bg: rgba(6, 87, 208, 0.05);
+            --secondary-text: #64748b;
+        }
+        
         body {
-            background-color: #070C14;
-            color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 40px 20px;
+            padding: 0;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 40px 20px;
         }
 
-        h1 { font-size: 2.5rem; margin-bottom: 10px; }
-        h2 { font-size: 1.8rem; color: #4A90E2; margin-top: 40px; }
-        h3 { font-size: 1.4rem; color: #7AB0FF; }
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            border-bottom: 1px solid var(--table-border);
+        }
+        
+        h1 { 
+            font-size: 2.8rem; 
+            margin-bottom: 15px;
+            color: var(--accent-blue);
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--secondary-text);
+        }
+        
+        h2 { 
+            font-size: 1.8rem; 
+            color: var(--accent-blue);
+            margin-top: 60px;
+            margin-bottom: 20px;
+        }
+        
+        h3 { 
+            font-size: 1.4rem; 
+            color: var(--accent-blue);
+            margin-top: 30px;
+        }
 
         .cta-button {
             display: inline-block;
-            background: #4A90E2;
+            background: var(--accent-blue);
             color: white !important;
-            padding: 15px 40px;
+            padding: 18px 45px;
             border-radius: 5px;
             text-decoration: none;
             font-weight: bold;
             margin: 30px 0;
-            transition: transform 0.2s;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(6, 87, 208, 0.2);
+            border: none;
+            font-size: 1.1rem;
         }
 
         .highlight {
-            border-left: 4px solid #4A90E2;
-            padding: 20px;
-            margin: 25px 0;
-            background: rgba(74, 144, 226, 0.1);
+            border-left: 4px solid var(--accent-blue);
+            padding: 25px;
+            margin: 35px 0;
+            background: var(--highlight-bg);
+            border-radius: 0 5px 5px 0;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 30px 0;
+            margin: 40px 0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
         }
 
         th, td {
-            border: 1px solid #1F2A3C;
-            padding: 15px;
+            border: 1px solid var(--table-border);
+            padding: 18px;
             text-align: left;
         }
 
         th {
-            background-color: #0E1624;
+            background-color: var(--table-header);
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: rgba(0,0,0,0.01);
         }
 
         .note {
-            color: #8C9BA5;
+            color: var(--secondary-text);
+            font-size: 0.95rem;
+            margin-top: 10px;
+        }
+        
+        .calculator {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            border: 1px solid var(--table-border);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin: 50px 0;
+        }
+        
+        .slider-container {
+            margin: 30px 0;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 8px;
+            -webkit-appearance: none;
+            background: #e2e8f0;
+            border-radius: 4px;
+            outline: none;
+            margin: 20px 0;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+        
+        .slider-values {
+            display: flex;
+            justify-content: space-between;
+            color: var(--secondary-text);
             font-size: 0.9rem;
-            margin-top: 20px;
+        }
+        
+        .result-box {
+            background: var(--accent-blue);
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: center;
+            color: white;
+        }
+        
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+
+        .guidelines {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 40px 0;
+            border-left: 4px solid var(--accent-blue);
+        }
+        
+        .guidelines ul {
+            padding-left: 20px;
+        }
+        
+        .guidelines li {
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 30px 0;
+            border-top: 1px solid var(--table-border);
+            color: var(--secondary-text);
+            font-size: 0.9rem;
         }
 
         @media (max-width: 768px) {
-            body { padding: 20px 10px; }
-            h1 { font-size: 2rem; }
-            table { display: block; overflow-x: auto; }
+            .container { padding: 20px 15px; }
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.6rem; margin-top: 40px; }
+            header { padding: 40px 20px 30px; }
+            .highlight { padding: 20px 15px; }
+            th, td { padding: 12px; }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>🚀 Join the Trading Circle HQ Partner Program</h1>
-        <p>Earn big. Scale fast. Partner with one of the most aggressively growing trading brands in the market.</p>
+    <header>
+        <div class="container">
+            <h1>Trading Circle HQ Partner Program</h1>
+            <p class="tagline">Earn big. Scale fast. Partner with one of the most aggressively growing trading brands in the market.</p>
+        </div>
+    </header>
 
+    <div class="container">
         <h2>💰 How It Works</h2>
+        <p>We don't pay for views. We pay for <strong>real results</strong> — clicks.</p>
+        
         <div class="highlight">
-            <strong>$1,000 for every 10,000 quality clicks</strong><br>
-            $0.10 per high-intent visitor · No earnings cap
+            <strong>You earn $1,000 for every 10,000 quality clicks</strong> you drive to our landing page.<br>
+            That's $0.10 per high-intent visitor. No earnings cap — scale without limits.
         </div>
 
         <h2>🧬 Sub-Partner Program</h2>
-        <h3>Earn 20% of your referrals' clicks</h3>
+        <h3>Multiply your income by building your team</h3>
+        
         <div class="highlight">
-            Example:<br>
-            ➤ Referred partner generates 10,000 clicks<br>
-            ➤ You receive 2,000 bonus clicks (+$200)
+            <strong>Example:</strong><br>
+            ➤ You refer a partner who generates 50,000 clicks<br>
+            ➤ You receive 10,000 bonus clicks (20%)<br>
+            ➤ That's an <strong>extra $1,000</strong> in your pocket from their work
         </div>
 
-        <h2>📊 Example Payouts</h2>
+        <h2>📈 Earnings Calculator</h2>
+        <div class="calculator">
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span>Your Monthly Clicks</span>
+                    <span id="views-value">50,000</span>
+                </div>
+                <input type="range" min="10000" max="100000" value="50000" step="10000" class="slider" id="views">
+                <div class="slider-values">
+                    <span>10k</span>
+                    <span>100k</span>
+                </div>
+            </div>
+            
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span>Number of Partners</span>
+                    <span id="partners-value">5</span>
+                </div>
+                <input type="range" min="0" max="50" value="5" step="1" class="slider" id="partners">
+                <div class="slider-values">
+                    <span>0</span>
+                    <span>50</span>
+                </div>
+            </div>
+            
+            <div class="result-box">
+                <div class="result-value" id="earnings">$7,500</div>
+                <small>Based on 50,000 clicks per partner at $0.10/click + 20% bonus</small>
+            </div>
+        </div>
+
+        <div class="guidelines">
+            <h3>Program Guidelines</h3>
+            <ul>
+                <li><strong>Quality traffic only:</strong> No bot clicks, incentivized traffic, or misleading ads</li>
+                <li><strong>Transparent marketing:</strong> Never misrepresent earnings potential</li>
+                <li><strong>Compliance required:</strong> All promotions must follow FTC guidelines</li>
+                <li><strong>No cookie stuffing:</strong> Natural click-throughs only</li>
+                <li><strong>Brand safety:</strong> No association with illegal or harmful content</li>
+            </ul>
+            <p class="note">Violations may result in withheld payments or account termination.</p>
+        </div>
+
+        <h2>👥 Sub-Partner System</h2>
+        <p>Earn 20% of all clicks generated by partners you refer (50,000 clicks per partner).</p>
+        
         <table>
             <tr>
-                <th>Your Clicks</th>
-                <th>Referral Clicks</th>
-                <th>Bonus Clicks</th>
-                <th>Total Payout</th>
+                <th>Your Referrals</th>
+                <th>Their Clicks</th>
+                <th>Your Bonus</th>
+                <th>Total Earnings</th>
             </tr>
             <tr>
-                <td>10,000</td>
-                <td>–</td>
-                <td>–</td>
-                <td>$1,000</td>
+                <td>5 partners</td>
+                <td>250,000</td>
+                <td>$5,000</td>
+                <td>$7,500</td>
             </tr>
             <tr>
-                <td>10,000</td>
-                <td>10,000</td>
-                <td>2,000</td>
-                <td>$1,200</td>
+                <td>10 partners</td>
+                <td>500,000</td>
+                <td>$10,000</td>
+                <td>$15,000</td>
             </tr>
             <tr>
-                <td>20,000</td>
-                <td>30,000</td>
-                <td>6,000</td>
-                <td>$2,600</td>
+                <td>25 partners</td>
+                <td>1,250,000</td>
+                <td>$25,000</td>
+                <td>$37,500</td>
             </tr>
         </table>
 
         <center>
-            <a href="https://tally.so/r/nWorgj" class="cta-button">Start Earning Now →</a>
-            <p class="note">Includes personal referral code & real-time tracking dashboard</p>
+            <a href="https://tally.so/r/nWorgj" class="cta-button">Join the Partner Program →</a>
+            <p class="note">Includes personal referral code & performance dashboard</p>
         </center>
     </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Trading Circle HQ. All rights reserved.</p>
+            <p class="note">Partner earnings are subject to our terms and conditions. All clicks are verified for quality.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Slider functionality
+        const viewsSlider = document.getElementById('views');
+        const partnersSlider = document.getElementById('partners');
+        const viewsValue = document.getElementById('views-value');
+        const partnersValue = document.getElementById('partners-value');
+        const earningsValue = document.getElementById('earnings');
+
+        function formatNumber(num) {
+            return num.toLocaleString('en-US');
+        }
+
+        function calculateEarnings() {
+            const views = parseInt(viewsSlider.value);
+            const partners = parseInt(partnersSlider.value);
+            
+            // Base earnings: $0.10 per click
+            const baseEarnings = views * 0.10;
+            
+            // Partner earnings: 20% of 50k clicks per partner
+            const partnerEarnings = partners * (50000 * 0.10 * 0.20);
+            
+            const totalEarnings = baseEarnings + partnerEarnings;
+            
+            earningsValue.textContent = `$${formatNumber(Math.round(totalEarnings))}`;
+        }
+
+        viewsSlider.addEventListener('input', function() {
+            viewsValue.textContent = formatNumber(this.value);
+            calculateEarnings();
+        });
+
+        partnersSlider.addEventListener('input', function() {
+            partnersValue.textContent = this.value;
+            calculateEarnings();
+        });
+
+        // Initial calculation
+        calculateEarnings();
+    </script>
 </body>
 </html>
