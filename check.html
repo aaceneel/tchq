@@ -3,82 +3,365 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Partner Dashboard - Referral Program</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Referral Tracking System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .referral-link {
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+            word-break: break-all;
+        }
+        .copy-btn {
+            background-color: #2ecc71;
+            margin-top: 10px;
+        }
+        .copy-btn:hover {
+            background-color: #27ae60;
+        }
+        .stats {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        .stats h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .stat-box {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        .stat-box h3 {
+            margin-top: 0;
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+        .stat-box p {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .login-form {
+            margin-bottom: 30px;
+        }
+        .section {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .nav-btn {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .nav-btn.active {
+            background-color: #3498db;
+            color: white;
+        }
+        .error {
+            color: #e74c3c;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
-    <div class="dashboard-container">
-        <aside class="sidebar">
-            <div class="logo">
-                <h2>Referral Program</h2>
-            </div>
-            <nav>
-                <ul>
-                    <li class="active"><a href="#overview">Overview</a></li>
-                    <li><a href="#links">My Links</a></li>
-                    <li><a href="#stats">Statistics</a></li>
-                    <li><a href="#earnings">Earnings</a></li>
-                    <li><a href="#settings">Settings</a></li>
-                </ul>
-            </nav>
-            <div class="user-info">
-                <span id="user-name">User Name</span>
-                <button id="logout-btn" class="btn btn-small">Logout</button>
-            </div>
-        </aside>
+    <div class="container">
+        <h1>Referral Tracking System</h1>
         
-        <main class="dashboard-content">
-            <section id="overview" class="dashboard-section active">
-                <h1>Dashboard Overview</h1>
-                
-                <div class="stats-cards">
-                    <div class="stat-card">
-                        <h3>Total Clicks</h3>
-                        <p class="stat-number" id="total-clicks">0</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>This Month</h3>
-                        <p class="stat-number" id="month-clicks">0</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>Total Earned</h3>
-                        <p class="stat-number" id="total-earned">$0.00</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>Next Payout</h3>
-                        <p class="stat-number" id="next-payout">$0.00</p>
-                    </div>
+        <div id="loginSection" class="section active">
+            <div class="login-form">
+                <div class="input-group">
+                    <label for="referralCode">Your Referral Code</label>
+                    <input type="text" id="referralCode" placeholder="Enter your unique referral code">
+                    <p class="error" id="codeError"></p>
                 </div>
-                
-                <div class="referral-link-container">
-                    <h2>Your Referral Link</h2>
-                    <div class="referral-link-box">
-                        <input type="text" id="referral-link" readonly>
-                        <button id="copy-link" class="btn">Copy</button>
-                    </div>
-                </div>
-                
-                <div class="referral-code-container">
-                    <h2>Your Referral Code</h2>
-                    <div class="referral-code-box">
-                        <input type="text" id="referral-code" readonly>
-                        <button id="copy-code" class="btn">Copy</button>
-                    </div>
-                </div>
-                
-                <div class="chart-container">
-                    <h2>Click Performance</h2>
-                    <canvas id="clicks-chart"></canvas>
-                </div>
-            </section>
+                <button id="loginBtn">Login / Register</button>
+            </div>
+        </div>
+
+        <div id="dashboardSection" class="section">
+            <div class="navbar">
+                <button class="nav-btn active" data-section="linkSection">Your Link</button>
+                <button class="nav-btn" data-section="statsSection">Stats</button>
+                <button id="logoutBtn" class="nav-btn">Logout</button>
+            </div>
             
-            <!-- Other sections would go here -->
-        </main>
+            <div id="linkSection" class="section active">
+                <h2>Your Referral Link</h2>
+                <p>Share this link with others to earn rewards!</p>
+                <div class="referral-link" id="referralLink"></div>
+                <button class="copy-btn" id="copyBtn">Copy to Clipboard</button>
+            </div>
+            
+            <div id="statsSection" class="section">
+                <div class="stats">
+                    <h2>Your Referral Statistics</h2>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <h3>Total Clicks</h3>
+                            <p id="totalClicks">0</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>Earnings</h3>
+                            <p id="earnings">$0.00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/referral.js"></script>
-    <script src="js/tracking.js"></script>
+
+    <script>
+        // DOM Elements
+        const loginSection = document.getElementById('loginSection');
+        const dashboardSection = document.getElementById('dashboardSection');
+        const linkSection = document.getElementById('linkSection');
+        const statsSection = document.getElementById('statsSection');
+        const referralCodeInput = document.getElementById('referralCode');
+        const loginBtn = document.getElementById('loginBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const referralLinkDiv = document.getElementById('referralLink');
+        const copyBtn = document.getElementById('copyBtn');
+        const totalClicksElem = document.getElementById('totalClicks');
+        const earningsElem = document.getElementById('earnings');
+        const codeError = document.getElementById('codeError');
+        const navBtns = document.querySelectorAll('.nav-btn');
+
+        // Constants
+        const EARNINGS_RATE = 1; // $1 per 10,000 clicks
+        const CLICKS_PER_DOLLAR = 10000;
+        
+        // Track if this is a referral visit
+        function checkForReferral() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const referrerCode = urlParams.get('ref');
+            
+            if (referrerCode) {
+                // Get referrer data or initialize
+                const referrerData = JSON.parse(localStorage.getItem(referrerCode) || '{"clicks": 0}');
+                
+                // Increment clicks
+                referrerData.clicks = (referrerData.clicks || 0) + 1;
+                
+                // Save updated data
+                localStorage.setItem(referrerCode, JSON.stringify(referrerData));
+                
+                // Show a small thank you message
+                const thankYouMsg = document.createElement('div');
+                thankYouMsg.style.padding = '10px';
+                thankYouMsg.style.backgroundColor = '#e8f4f8';
+                thankYouMsg.style.borderRadius = '4px';
+                thankYouMsg.style.textAlign = 'center';
+                thankYouMsg.style.marginBottom = '20px';
+                thankYouMsg.textContent = 'Thank you for visiting through a referral link!';
+                document.querySelector('.container').prepend(thankYouMsg);
+                
+                // Remove the message after 3 seconds
+                setTimeout(() => {
+                    thankYouMsg.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        // Initialize
+        function init() {
+            checkForReferral();
+            
+            // Check if user is logged in
+            const userData = getUserData();
+            if (userData) {
+                showDashboard(userData.code);
+            } else {
+                showLogin();
+            }
+            
+            // Event listeners
+            loginBtn.addEventListener('click', handleLogin);
+            logoutBtn.addEventListener('click', handleLogout);
+            copyBtn.addEventListener('click', copyReferralLink);
+            
+            // Navigation
+            navBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetSection = this.getAttribute('data-section');
+                    if (targetSection) {
+                        navBtns.forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        document.querySelectorAll('#dashboardSection .section').forEach(section => {
+                            section.classList.remove('active');
+                        });
+                        
+                        document.getElementById(targetSection).classList.add('active');
+                    }
+                });
+            });
+        }
+        
+        // Get user data from localStorage
+        function getUserData() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                const userData = JSON.parse(localStorage.getItem(currentUser));
+                return { code: currentUser, ...userData };
+            }
+            return null;
+        }
+        
+        // Handle login/register
+        function handleLogin() {
+            const code = referralCodeInput.value.trim();
+            
+            if (!code) {
+                codeError.textContent = 'Please enter a referral code';
+                return;
+            }
+            
+            // Check if code is valid (alphanumeric only)
+            if (!/^[a-zA-Z0-9]+$/.test(code)) {
+                codeError.textContent = 'Referral code must contain only letters and numbers';
+                return;
+            }
+            
+            codeError.textContent = '';
+            
+            // Check if user exists, if not create a new one
+            const userData = JSON.parse(localStorage.getItem(code) || '{"clicks": 0}');
+            
+            // Save data and current user
+            localStorage.setItem(code, JSON.stringify(userData));
+            localStorage.setItem('currentUser', code);
+            
+            showDashboard(code);
+        }
+        
+        // Logout
+        function handleLogout() {
+            localStorage.removeItem('currentUser');
+            showLogin();
+        }
+        
+        // Show login section
+        function showLogin() {
+            loginSection.classList.add('active');
+            dashboardSection.classList.remove('active');
+            referralCodeInput.value = '';
+        }
+        
+        // Show dashboard
+        function showDashboard(code) {
+            loginSection.classList.remove('active');
+            dashboardSection.classList.add('active');
+            
+            // Show the link section by default
+            linkSection.classList.add('active');
+            statsSection.classList.remove('active');
+            navBtns[0].classList.add('active');
+            navBtns[1].classList.remove('active');
+            
+            // Generate referral link
+            const baseUrl = window.location.href.split('?')[0]; // Remove any existing parameters
+            const referralLink = `${baseUrl}?ref=${code}`;
+            referralLinkDiv.textContent = referralLink;
+            
+            // Update stats
+            updateStats(code);
+        }
+        
+        // Update statistics
+        function updateStats(code) {
+            const userData = JSON.parse(localStorage.getItem(code) || '{"clicks": 0}');
+            const clicks = userData.clicks || 0;
+            const earnings = (clicks / CLICKS_PER_DOLLAR) * EARNINGS_RATE;
+            
+            totalClicksElem.textContent = clicks;
+            earningsElem.textContent = `$${earnings.toFixed(2)}`;
+        }
+        
+        // Copy referral link to clipboard
+        function copyReferralLink() {
+            const linkText = referralLinkDiv.textContent;
+            navigator.clipboard.writeText(linkText).then(() => {
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                }, 2000);
+            });
+        }
+        
+        // Initialize the application
+        init();
+    </script>
 </body>
 </html>
