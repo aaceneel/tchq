@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Dashboard - Referral Program</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>Referral Program</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active"><a href="#overview">Overview</a></li>
+                    <li><a href="#links">My Links</a></li>
+                    <li><a href="#stats">Statistics</a></li>
+                    <li><a href="#earnings">Earnings</a></li>
+                    <li><a href="#settings">Settings</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span id="user-name">User Name</span>
+                <button id="logout-btn" class="btn btn-small">Logout</button>
+            </div>
+        </aside>
+        
+        <main class="dashboard-content">
+            <section id="overview" class="dashboard-section active">
+                <h1>Dashboard Overview</h1>
+                
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <h3>Total Clicks</h3>
+                        <p class="stat-number" id="total-clicks">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>This Month</h3>
+                        <p class="stat-number" id="month-clicks">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Earned</h3>
+                        <p class="stat-number" id="total-earned">$0.00</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Next Payout</h3>
+                        <p class="stat-number" id="next-payout">$0.00</p>
+                    </div>
+                </div>
+                
+                <div class="referral-link-container">
+                    <h2>Your Referral Link</h2>
+                    <div class="referral-link-box">
+                        <input type="text" id="referral-link" readonly>
+                        <button id="copy-link" class="btn">Copy</button>
+                    </div>
+                </div>
+                
+                <div class="referral-code-container">
+                    <h2>Your Referral Code</h2>
+                    <div class="referral-code-box">
+                        <input type="text" id="referral-code" readonly>
+                        <button id="copy-code" class="btn">Copy</button>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <h2>Click Performance</h2>
+                    <canvas id="clicks-chart"></canvas>
+                </div>
+            </section>
+            
+            <!-- Other sections would go here -->
+        </main>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/referral.js"></script>
+    <script src="js/tracking.js"></script>
+</body>
+</html>
